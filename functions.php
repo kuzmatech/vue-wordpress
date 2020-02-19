@@ -32,7 +32,6 @@ function vue_wordpress_scripts()
 {
     // Styles
     wp_enqueue_style( 'style.css', get_template_directory_uri() . '/style.css' );
-    wp_enqueue_style('vue_wordpress.css', get_template_directory_uri() . '/dist/vue-wordpress.css');
 
     // Scripts
 
@@ -52,6 +51,7 @@ function vue_wordpress_scripts()
             define('WP_DEBUG', false);
             // Function For Production
             wp_enqueue_script('vue_wordpress.js', get_template_directory_uri() . '/dist/vue-wordpress.js', array(), null, true);
+            wp_enqueue_style('vue_wordpress.css', get_template_directory_uri() . '/dist/vue-wordpress.css');
     }
     define('WP_ENV', $environment);
 }
