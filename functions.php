@@ -36,6 +36,7 @@ function vue_wordpress_scripts()
 
     // Scripts
 
+    $hostname = $_SERVER['SERVER_NAME']; 
     switch ($hostname) {
         case 'localhost':
         case 'localtest.me':
