@@ -36,11 +36,23 @@ function vue_wordpress_scripts()
 
     // Scripts
 
-    // Enable For Production - Disable for Development
-    wp_enqueue_script('vue_wordpress.js', get_template_directory_uri() . '/dist/vue-wordpress.js', array(), null, true);
-
-    // Enable For Development - Remove for Production
-    // wp_enqueue_script( 'vue_wordpress.js', 'http://localhost:8080/vue-wordpress.js', array(), false, true );
+    switch ($hostname) {
+        case 'localhost':
+        case 'localtest.me':
+        case '127.0.0.1':
+            $environment = 'development';
+            define('WP_ENV', 'development');
+            define('WP_DEBUG', true);
+            // Function for Development
+            wp_enqueue_script( 'vue_wordpress.js', 'http://localhost:8080/vue-wordpress.js', array(), false, true );
+            break;
+        default:
+            $environment = 'production';
+            define('WP_DEBUG', false);
+            // Function For Production
+            wp_enqueue_script('vue_wordpress.js', get_template_directory_uri() . '/dist/vue-wordpress.js', array(), null, true);
+    }
+    define('WP_ENV', $environment);
 }
 
 add_action( 'wp_enqueue_scripts', 'vue_wordpress_scripts' );
